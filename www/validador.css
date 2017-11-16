@@ -1,7 +1,17 @@
 html,
-body {
+body,
+body>div,
+body>div>.main {
     height: 100%;
     width: 100%;
+}
+
+#primdiv {
+    padding: 0;
+}
+
+body>div>.main>div {
+    height: 100%;
 }
 
 #navbar {
@@ -31,6 +41,10 @@ body {
 
 #nav-left {
     display: flex;
+}
+
+.main {
+    margin: 0;
 }
 
 #pag {
@@ -114,6 +128,16 @@ body {
     border-radius: 1px;
 }
 
+#pdf {
+    height: calc(100% - 50px);
+}
+
+#iframedou {
+    min-height: 600px;
+    height: 100%;
+    width: 100%
+}
+
 @media screen and (max-width: 600px) {
     #info,
     #navbar li {
@@ -148,5 +172,11 @@ body {
     }
     #editor {
         margin-bottom: 10px;
+    }
+    body>div>.main>div {
+        height: auto;
+    }
+    #coluna2 {
+        padding-top: 15px !important;
     }
 }

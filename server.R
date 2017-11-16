@@ -70,8 +70,7 @@ function(input, output, session) {
     url <- paste0(base_url, jornal, pagina, data_url, fim)
     destino <- './www/pdfjs/web/pagina.pdf'
     httr::RETRY(verb = "GET", url = url, httr::write_disk(destino, overwrite = TRUE))    
-    HTML('<iframe style="height:600px; width:100%" src="./pdfjs/web/viewer.html#zoom=125"></iframe>')
-
+    HTML('<iframe id="iframedou" src="./pdfjs/web/viewer.html#zoom=115"></iframe>')
   })
   
   output$editor <- renderUI({
@@ -79,8 +78,6 @@ function(input, output, session) {
     valores$nova
     div(
       div(
-        tags$script(src = "./js/tinymce/tinymce.min.js"),
-        tags$script(src = "./js/editor.js"),
         tags$script('editor("#textoPrincipal")')
       ),
       div(
@@ -256,7 +253,6 @@ function(input, output, session) {
     RJDBC::dbDisconnect(conexao)
     indice <- which(valores$ato$SEQ_ATO == input$seq_ato_alteracao)[[1]]
     div(
-      tags$script(src = "./js/editor.js"),
       tags$script('editor("#textoAlteracao")'),
       fluidRow(
         column(6, textAreaInput('txt_ementa_alteracao', 'Ementa: ', resize = 'vertical',

@@ -1,8 +1,13 @@
-fluidPage(
+fluidPage(id = "primdiv",
   useShinyjs(),
   extendShinyjs(text = jsCode),
-  tags$link(href = 'validador.css', type = "text/css", rel = 'stylesheet', media = 'all'),
-  tags$nav(id = "navbar", class="navbar-fixed-top",
+  tags$head(
+    tags$link(href = 'validador.css', type = "text/css", rel = 'stylesheet', media = 'all'),
+    tags$script(src = "./js/editor.js"),
+    tags$script(src = "./js/tinymce/tinymce.min.js"),
+    tags$script(src = "./js/navbar.js")
+  ),
+  tags$div(id = "navbar", class="navbar-fixed-top",
           tags$div(
                    tags$li(id = "webname", class = "navbar-brand", href = "#", "Validador"),
                    tags$li(actionButton(class = "btn btn-default navbar-btn", "nova",
@@ -11,10 +16,9 @@ fluidPage(
                                         "Alterar norma", icon = icon('file', lib = 'glyphicon')))),
           tags$li(class = "navbar-right", textOutput('info'))
   ),
-  tags$div(
-    class = "main", 
-    fluidRow(
+  fluidRow(class = "main", 
       column(6,
+             id = "coluna1",
              textOutput('pag'),
              a(id = "toggleMeta", "Mostrar/esconder meta informações", href = "#"),
              uiOutput('meta_info'),
@@ -27,20 +31,12 @@ fluidPage(
                                    icon = icon("remove", lib = "glyphicon"))),
              uiOutput('editor')
       ),
-      column(6, 
+      column(6,
+             id = "coluna2",
              fluidRow(id = "pag-pdf",
                       numericInput('pag_pdf', 'Página:', value = 1, min = 1)),
              uiOutput('pdf')
       )
-    )
   ),
-  fluidRow(textInput('entrada', 'Teste de texto', ''), style = 'display:none;'),
-  tags$script(HTML("
-    $(window).resize(function () { 
-      $('.main').css('padding-top', parseInt($('#navbar').css('height'))+10);
-    });
-    $(window).load(function () { 
-      $('.main').css('padding-top', parseInt($('#navbar').css('height'))+10);         
-    });
-                   "))
+  fluidRow(textInput('entrada', 'Teste de texto', ''), style = 'display:none;')
 )
