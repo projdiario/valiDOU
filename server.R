@@ -78,6 +78,7 @@ function(input, output, session) {
     valores$nova
     div(
       div(
+        tags$script(src = "./js/tinymce/tinymce.min.js"),
         tags$script('editor("#textoPrincipal")')
       ),
       div(
