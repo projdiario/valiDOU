@@ -63,7 +63,11 @@ function(input, output, session) {
   output$pdf <- renderUI({
     observacao <- normas[valores$num, ]
     base_url <- 'http://pesquisa.in.gov.br/imprensa/servlet/INPDFViewer?'
-    jornal <- paste0('jornal=', observacao$ID_TIPO_SECAO)
+    cod_jornal <- switch(observacao$ID_TIPO_SECAO, 
+                         '1' = '515',
+                         '2' = '529',
+                         '3' = '530')
+    jornal <- paste0('jornal=', cod_jornal)
     pagina <- paste0('&pagina=', input$pag_pdf)
     data_url <- paste0('&data=', format(observacao$DTA_PROMULGACAO, format = '%d/%m/%Y') )
     fim <- '&captchafield=firstAccess'
